@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "6f9ac102-ba6f-441d-b131-2561dbd9d885",
+		"name": "Localhost Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17089615"
+	},
+	"item": [
+		{
+			"name": "localhost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/selectAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"selectAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Insert Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/insertProduk?namaProduk=Indomie Goreng 80g&keterangan=Bahan Makanan&harga=2900&jumlah=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"insertProduk"
+					],
+					"query": [
+						{
+							"key": "namaProduk",
+							"value": "Indomie Goreng 80g"
+						},
+						{
+							"key": "keterangan",
+							"value": "Bahan Makanan"
+						},
+						{
+							"key": "harga",
+							"value": "2900"
+						},
+						{
+							"key": "jumlah",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Update Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/updateProduk?namaProduk=MI Sedap&keterangan=Bahan Makanan&harga=4500&jumlah=100000&idProduct=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updateProduk"
+					],
+					"query": [
+						{
+							"key": "namaProduk",
+							"value": "MI Sedap"
+						},
+						{
+							"key": "keterangan",
+							"value": "Bahan Makanan"
+						},
+						{
+							"key": "harga",
+							"value": "4500"
+						},
+						{
+							"key": "jumlah",
+							"value": "100000"
+						},
+						{
+							"key": "idProduct",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Delete Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/deleteProduk?idProduct=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteProduk"
+					],
+					"query": [
+						{
+							"key": "idProduct",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -26,17 +26,9 @@ return function (App $app) {
     $app->post('/deleteProduk', function (Request $request, Response $response, array $args) use ($app) {
         return $response->withJson(CrudApiController::DeleteProduk($this, $request, $response, $args));
     });
-    
 
 
-
-
-
-    $app->get('/[{name}]', function (Request $request, Response $response, array $args) use ($container) {
-        // Sample log message
-        $container->get('logger')->info("Slim-Skeleton '/' route");
-
-        // Render index view
+    $app->get('/', function (Request $request, Response $response, array $args) use ($container) {
         return $container->get('renderer')->render($response, 'index.html', $args);
     });
 };

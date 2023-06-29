@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+    <!-- Datatable -->
     <link href="DataTables-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="Select-1.6.2/css/select.dataTables.min.css" rel="stylesheet" />
     <link href="Buttons-2.3.6/css/buttons.dataTables.min.css" rel="stylesheet" />
 
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
@@ -44,6 +45,31 @@
         </div>
     </div>
 
+    <!-- modalPerbaharuiProduk -->
+    <div class="modal fade" id="modalPerbaharuiProduk" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="form-group col-md">
+                    <label for="formNamaProdukUp">Nama Produk</label>
+                    <input type="text" name="" id="formNamaProdukUp" class="form-control" placeholder="Nama Produk"
+                        aria-describedby="helpId">
+                    <label for="formKeteranganUp">Keterangan</label>
+                    <input type="text" name="" id="formKeteranganUp" class="form-control" placeholder="Keterangan"
+                        aria-describedby="helpId">
+                    <label for="formHargaUp">Harga</label>
+                    <input type="number" name="" id="formHargaUp" class="form-control" placeholder="Harga"
+                        aria-describedby="helpId">
+                    <label for="formJumlahUp">Jumlah</label>
+                    <input type="number" name="" id="formJumlahUp" class="form-control" placeholder="Jumlah"
+                        aria-describedby="helpId">
+                    <button type="submit" name="" id="buttonFormTambahProdukUp"
+                        class="btn btn-primary tn-lg btn-block mt-4">Perbaharui</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- modalHapusProduk -->
     <div class="modal fade" id="modalHapusProduk" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
         aria-hidden="true">
@@ -51,21 +77,23 @@
             <div class="modal-content">
                 <div class="col-md py-3">
                     <h1>Anda yakin mau menghapus produk ini?</h1>
-                    <h2 id="nama_produx"></h2>
-                    <button type="button" name="" id="buttonModalHapusProduk" class="btn btn-danger tn-lg btn-block mt-4">Hapus</button>
+                    <h2 id="deleteProductName"></h2>
+                    <button type="button" name="" id="buttonModalHapusProduk"
+                        class="btn btn-danger tn-lg btn-block mt-4">Hapus</button>
                 </div>
             </div>
         </div>
     </div>
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-md">
-            <h1>Implementasi Tugas 10</h1>
-            <P>Slim PHP Micro Framework, Medoo DB Framework, Javascript, JQuerry Liblary, DataTable, Bootstrap Grid</P>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md">
+                <h1>Implementasi Tugas 10</h1>
+                <P>Slim PHP Micro Framework, Medoo DB Framework, Javascript, JQuerry Liblary, DataTable, Bootstrap Grid
+                </P>
+            </div>
         </div>
     </div>
-</div>
     <div class="container py-2">
         <div class="row">
             <div class="col-md">
@@ -102,7 +130,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
         crossorigin="anonymous"></script>
-    
+
     <!-- Sweet Aleret -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -147,27 +175,55 @@
                     }
                 },
                 {
+                    text: 'Ubah Produk',
+                    action: function () {
+                        getProduct = mydt.rows({ selected: true }).data()[0];
+
+                        $('#formNamaProdukUp').removeAttr('value');
+                        $('#formKeteranganUp').removeAttr('value');
+                        $('#formHargaUp').removeAttr('value');
+                        $('#formJumlahUp').removeAttr('value');
+
+                        $("#formNamaProdukUp").val(`${getProduct.nama_produk}`).change();
+                        $("#formKeteranganUp").val(`${getProduct.keterangan}`).change();
+                        $("#formHargaUp").val(`${getProduct.harga}`).change();
+                        $("#formJumlahUp").val(`${getProduct.jumlah}`).change();
+
+                        $('#modalPerbaharuiProduk').modal('show');
+
+
+                    }
+                },
+                {
                     text: 'Hapus Produk',
                     action: function () {
 
-                        $('#modalHapusProduk').modal('show')
                         getProduct = mydt.rows({ selected: true }).data()[0];
-                        // $('#nama_produx').innerHTML = getProduct.nama_produk;
-                        // console.log(getProduct.nama_produk);
+                        
+                        $('#deleteProductName').empty();
+                        $('#deleteProductName').append(`${getProduct.nama_produk}`);
 
+                        $('#modalHapusProduk').modal('show')
 
                     }
                 },
             ]
         });
 
-        // Tombol DT tambahProduk
+        // Tombol DT tambah Produk
         $("#buttonFormTambahProduk").on("click", function () {
             tambahProduk();
             location.reload();
 
         });
-        
+
+        // Tombol DT Perbaharui Produk
+        $("#buttonFormTambahProdukUp").on("click", function () {
+            perbaharuiProduk(getProduct.id);
+            location.reload();
+
+        });
+
         // Tombol DT hapusProduk
         $("#buttonModalHapusProduk").on("click", function () {
             hapusProduk(getProduct.id);
@@ -217,9 +273,31 @@
                     jumlah: formJumlah
                 }
             });
-        
-        }
 
+        }
+        // 
+
+        // Fungsi Perbaharui Produk
+        function perbaharuiProduk(id) {
+
+            let formNamaProduk = $("#formNamaProdukUp").val();
+            let formKeterangan = $("#formKeteranganUp").val();
+            let formHarga = $("#formHargaUp").val();
+            let formJumlah = $("#formJumlahUp").val();
+
+            $.ajax({
+                url: "/updateProduk",
+                method: "POST",
+                data: {
+                    idProduct: id,
+                    namaProduk: formNamaProduk,
+                    keterangan: formKeterangan,
+                    harga: formHarga,
+                    jumlah: formJumlah
+                }
+            });
+
+        }
 
         // Ajax dengan result global
         //
