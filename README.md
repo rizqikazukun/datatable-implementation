@@ -1,8 +1,12 @@
 # Implementasi Tugas 10
+
+![tugas10](./Doc/img.png)
+
 Dibuat Oleh : Rizqi Pratama  
 Dibuat di :
 - Fedora 38
 - PHP 8.2.7
+
 
 ## Tech Stack
 Slim PHP Micro Framework, Medoo DB Framework, Javascript, JQuerry Liblary, DataTable, Bootstrap Grid
